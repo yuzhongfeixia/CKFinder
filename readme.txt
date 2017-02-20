@@ -1,0 +1,1 @@
+该应用只是在springboot中集成ckfinder，测试所用。
