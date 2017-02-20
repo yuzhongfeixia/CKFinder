@@ -1,0 +1,267 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
+	<groupId>AFIS-JX</groupId>
+	<artifactId>AFIS-JX-Web</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<java.version>1.8</java.version>
+		<jedis.version>2.1.0</jedis.version>
+		<springboot.version>1.4.2.RELEASE</springboot.version>
+	</properties>
+	<dependencies>
+		<!-- spring-web-starter -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${springboot.version}</version>
+		</dependency>
+
+		<!-- hot swap -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<version>${springboot.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>AFIS-JX</groupId>
+			<artifactId>AFIS-JX-Common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<version>${springboot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>org.json</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			  <groupId>redis.clients</groupId>
+			  <artifactId>jedis</artifactId>
+			  <version>2.1.0</version>
+			  <scope>runtime</scope>
+		</dependency>
+      <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+      <version>2.7</version>
+    </dependency>
+        <!--  百度 ueditor 依赖jar -->
+    	<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
+		<!-- 导出excel表格依赖jar -->
+		<dependency>
+			<groupId>net.sourceforge.jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+			<version>2.6.12</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>19.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>javax.servlet.jsp</groupId>
+		    <artifactId>javax.servlet.jsp-api</artifactId>
+		    <version>2.3.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jboss</groupId>
+		    <artifactId>jboss-vfs</artifactId>
+		    <version>3.2.12.Final</version>
+		</dependency>
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		<dependency>
+		    <groupId>net.coobird</groupId>
+		    <artifactId>thumbnailator</artifactId>
+		    <version>0.4.8</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.8.0</version>
+		</dependency>
+				
+	</dependencies>
+
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.2.RELEASE</version>
+	</parent>
+
+
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+				<!--BO: add by hsw 20130724 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/release/JX-Web/lib_temp</outputDirectory>
+							<excludeClassifiers>sources</excludeClassifiers>
+							<overWriteIfNewer>true</overWriteIfNewer>
+                            <includeScope>compile</includeScope>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<id>release</id>
+						<phase>install</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<delete dir="${project.build.directory}/release/JX-Web/config"></delete>
+								<delete dir="${project.build.directory}/release/JX-Web/lib"></delete>
+								<delete dir="${project.build.directory}/release/JX-Web/logs"></delete>
+								<mkdir dir="${project.build.directory}/release/JX-Web/config"></mkdir>
+								<mkdir dir="${project.build.directory}/release/JX-Web/lib"></mkdir>
+								<mkdir dir="${project.build.directory}/release/JX-Web/logs"></mkdir>
+								<copy todir="${project.build.directory}/release/JX-Web/static">
+									<fileset dir="${basedir}/static" />
+								</copy>
+								<copy todir="${project.build.directory}/release/JX-Web/config">
+									<fileset dir="${basedir}/config" />
+								</copy>
+								<copy todir="${project.build.directory}/release/JX-Web/bin">
+									<fileset dir="${basedir}/bin" />
+								</copy>
+
+
+								<!-- BO heshiwei -->
+								<copy todir="${project.build.directory}/release/JX-Web/lib">
+									<fileset dir="${basedir}/target">
+										<exclude name="*-sources.jar"></exclude>
+										<exclude name="*-javadoc.jar"></exclude>
+										<include name="*.jar"></include>
+									</fileset>
+								</copy>
+								<!-- EO -->
+
+								<copy todir="${project.build.directory}/release/JX-Web/lib">
+									<fileset dir="${project.build.directory}/release/JX-Web/lib_temp">
+										<exclude name="*-sources.jar"></exclude>
+									</fileset>
+								</copy>
+								<delete dir="${project.build.directory}/release/JX-Web/lib_temp"></delete>
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!--EO: add by hsw 20130724 -->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<goals>
+					<goal>jar</goal>
+				</goals>
+				<!--BO: add by hsw 20130724 -->
+				<configuration>
+					<!-- <outputDirectory>${project.build.directory}/release/JX-Web/lib_temp</outputDirectory> -->
+					<excludes>
+						<exclude>*.xml</exclude>
+						<exclude>*.properties</exclude>
+					</excludes>
+				</configuration>
+				<!--EO: add by hsw 20130724 -->
+			</plugin>
+
+		
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+		<!--BO: add by hsw 20130724 -->
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-dependency-plugin</artifactId>
+										<versionRange>[1.0.0,)</versionRange>
+										<goals>
+											<goal>copy-dependencies</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<!--EO: add by hsw 20130724 -->
+	</build>
+</project>
