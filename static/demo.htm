@@ -1,0 +1,29 @@
+<html>
+<head>
+<script src="/js/jquery1.8.js" type="text/javascript"></script>
+<script src="/js/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="/ckfinder/ckfinder.js"></script>
+</head>
+<body>
+	<div>
+		<textarea rows="5" cols="10" id="content" name="content"></textarea>
+	</div>
+
+	<script type="text/javascript">
+		$(function() {
+			var editor = CKEDITOR.replace(
+				"content",
+				{
+					filebrowserImageUploadUrl : '/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Images'
+				});
+			CKFinder.setupCKEditor(editor, '/ckfinder/');
+			CKFinder.setupCKEditor(editor, {
+				basePath : '/ckfinder/',
+				skin : 'kama',
+				currentFolder : 'abcdef'
+			});
+		})
+	</script>
+</body>
+</html>
