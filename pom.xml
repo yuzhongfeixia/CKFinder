@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-<modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 	<groupId>AFIS-JX</groupId>
-	<artifactId>AFIS-JX-Web</artifactId>
+	<artifactId>AFIS-Editor</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
 		<java.version>1.8</java.version>
@@ -25,30 +25,18 @@
 			<scope>test</scope>
 		</dependency>
 
-
-		<dependency>
-			<groupId>AFIS-JX</groupId>
-			<artifactId>AFIS-JX-Common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>org.json</artifactId>
 			<version>2.0</version>
 		</dependency>
 		<dependency>
-			  <groupId>redis.clients</groupId>
-			  <artifactId>jedis</artifactId>
-			  <version>2.1.0</version>
-			  <scope>runtime</scope>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.7</version>
 		</dependency>
-      <dependency>
-      <groupId>joda-time</groupId>
-      <artifactId>joda-time</artifactId>
-      <version>2.7</version>
-    </dependency>
-        <!--  百度 ueditor 依赖jar -->
-    	<dependency>
+		<!-- 百度 ueditor 依赖jar -->
+		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.3.2</version>
@@ -80,31 +68,31 @@
 			<version>19.0</version>
 		</dependency>
 		<dependency>
-		    <groupId>javax.servlet.jsp</groupId>
-		    <artifactId>javax.servlet.jsp-api</artifactId>
-		    <version>2.3.1</version>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.3.1</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.jboss</groupId>
-		    <artifactId>jboss-vfs</artifactId>
-		    <version>3.2.12.Final</version>
+			<groupId>org.jboss</groupId>
+			<artifactId>jboss-vfs</artifactId>
+			<version>3.2.12.Final</version>
 		</dependency>
 		<dependency>
-		    <groupId>javax.mail</groupId>
-		    <artifactId>mail</artifactId>
-		    <version>1.4</version>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
 		</dependency>
 		<dependency>
-		    <groupId>net.coobird</groupId>
-		    <artifactId>thumbnailator</artifactId>
-		    <version>0.4.8</version>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.8</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.google.code.gson</groupId>
-		    <artifactId>gson</artifactId>
-		    <version>2.8.0</version>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.0</version>
 		</dependency>
-				
+
 	</dependencies>
 
 
@@ -115,7 +103,7 @@
 	</parent>
 
 
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -126,7 +114,7 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-				<!--BO: add by hsw 20130724 -->
+			<!--BO: add by hsw 20130724 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
@@ -141,7 +129,7 @@
 							<outputDirectory>${project.build.directory}/release/JX-Web/lib_temp</outputDirectory>
 							<excludeClassifiers>sources</excludeClassifiers>
 							<overWriteIfNewer>true</overWriteIfNewer>
-                            <includeScope>compile</includeScope>
+							<includeScope>compile</includeScope>
 						</configuration>
 					</execution>
 				</executions>
@@ -217,8 +205,8 @@
 				<!--EO: add by hsw 20130724 -->
 			</plugin>
 
-		
-			
+
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
