@@ -28,12 +28,12 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
 	// });
 	// }
 	//
-	 @Override
-	 public void addViewControllers(ViewControllerRegistry registry) {
-	 registry.addViewController("/").setViewName("forward:/ckfinder_demo.htm");
-	 registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-	 super.addViewControllers(registry);
-	 }
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/").setViewName("forward:/ckfinder_demo.htm");
+		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+		super.addViewControllers(registry);
+	}
 
 	@Autowired
 	private StorageProperties storageProperties;
