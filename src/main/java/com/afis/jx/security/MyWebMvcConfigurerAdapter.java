@@ -1,4 +1,4 @@
-package com.afis.jx;
+package com.afis.jx.security;
 
 import javax.servlet.MultipartConfigElement;
 
