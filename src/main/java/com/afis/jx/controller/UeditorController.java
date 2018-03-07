@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.afis.jx.ueditor.MyActionEnter;
@@ -26,8 +28,8 @@ public class UeditorController {
 
 	private String virtualPath;
 
-	@RequestMapping(value = "/config")
-	public void config(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {
+	@RequestMapping(value = "/config",method={RequestMethod.GET})
+	public void configGet(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {
 		response.setContentType("application/json");
 		InputStream is = this.getClass().getClassLoader().getResourceAsStream("ueditor-config.json");
 		String exec = new MyActionEnter(request, is, location, virtualPath).exec();
@@ -35,6 +37,14 @@ public class UeditorController {
 		writer.write(exec);
 		writer.flush();
 		writer.close();
+	}
+	
+	@RequestMapping(value = "/config",method={RequestMethod.POST})
+	@ResponseBody
+	public String configPost(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {
+		InputStream is = this.getClass().getClassLoader().getResourceAsStream("ueditor-config.json");
+		String exec = new MyActionEnter(request, is, location, virtualPath).exec();
+		return exec;
 	}
 
 	public String getLocation() {
