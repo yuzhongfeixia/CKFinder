@@ -17,8 +17,8 @@
 	Configure the location of uploaded files. See the following article for more details:
 	http://docs.cksource.com/CKFinder_2.x/Developers_Guide/Java/Configuration/baseURL_and_baseDir
 	-->
-	<baseDir></baseDir>
-	<baseURL>/CKFinderJava/userfiles/</baseURL>
+	<baseDir>D:/home/chengen/workspace/test/</baseDir>
+	<baseURL>/picture/</baseURL>
 	<licenseKey></licenseKey>
 	<licenseName></licenseName>
 	<!--
